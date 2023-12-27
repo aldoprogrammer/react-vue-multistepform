@@ -1,25 +1,46 @@
 import { FormWrapper } from "./FormWrapper"
 
 type UserData = {
-    firstName: string
-    lastName: string
-    age: string
+  firstName: string
+  lastName: string
+  age: string
 }
 
-type UserFormsProps = UserData & {
-    updateFields: (fields: Partial<UserData>) => void
+type UserFormProps = UserData & {
+  updateFields: (fields: Partial<UserData>) => void
 }
 
-export function UserForm({ firstName, lastName, age, updateFields}: UserFormsProps) {
-    updateFields({ firstName: "Kyle", lastName: 'Cook'})
+export function UserForm({
+  firstName,
+  lastName,
+  age,
+  updateFields,
+}: UserFormProps) {
   return (
     <FormWrapper title="User Details">
       <label>First Name</label>
-      <input type='text' autoFocus required value={firstName}/>
+      <input
+        autoFocus
+        required
+        type="text"
+        value={firstName}
+        onChange={e => updateFields({ firstName: e.target.value })}
+      />
       <label>Last Name</label>
-      <input type='text' required value={lastName}/>
+      <input
+        required
+        type="text"
+        value={lastName}
+        onChange={e => updateFields({ lastName: e.target.value })}
+      />
       <label>Age</label>
-      <input type='number' required min={1} value={age} />
+      <input
+        required
+        min={1}
+        type="number"
+        value={age}
+        onChange={e => updateFields({ age: e.target.value })}
+      />
     </FormWrapper>
   )
 }
